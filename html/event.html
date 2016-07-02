@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li><a href="../index.html">IB</a></li><li><a href="../index.html">git</a></li><li><a href="../index.html">nodestart</a></li><li><a href="../index.html">webstorm</a></li><li><a href="../index.html">nodebasic</a></li><li><a href="../index.html">global</a></li><li><a href="../index.html">module</a></li><li><a href="../index.html">buffer</a></li><li><a href="../index.html">file</a></li><li><a href="../index.html">event</a></li><li><a href="../index.html">stream</a></li><li><a href="../index.html">http</a></li><li><a href="../index.html">ajax</a></li><li><a href="../index.html">jsonp</a></li><li><a href="../index.html">cross</a></li><li><a href="../index.html">http2</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: J.&#x4E8B;&#x4EF6;</p>
+<p>transition: cards
+theme: blue
+highlightStyle:javascript</p>
+<p>[slide]</p>
+<p>#&#x4E8B;&#x4EF6;
+&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#xFF0C;&#x5B9A;&#x4E49;&#x5BF9;&#x8C61;&#x95F4;&#x7684;&#x4E00;&#x79CD;<span class="red">&#x4E00;&#x5BF9;&#x591A;</span>&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x4E00;&#x4E2A;&#x53D1;&#x5E03;&#x8005;&#x53EF;&#x4EE5;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x8BA2;&#x9605;&#x8005;&#xFF0C;&#x5F53;&#x53D1;&#x5E03;&#x8005;<span class="red">&#x53D1;&#x751F;&#x53D8;&#x5316;</span>&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4ED6;&#x53EF;&#x4EE5;&#x5C06;&#x6D88;&#x606F;&#x4E00;&#x4E00;&#x901A;&#x77E5;&#x7ED9;&#x6240;&#x6709;&#x7684;&#x8BA2;&#x9605;&#x8005;,&#x5F53;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x4F9D;&#x8D56;&#x4E8E;&#x5B83;&#x7684;&#x5BF9;&#x8C61;&#x90FD;<span class="red">&#x5F97;&#x5230;&#x901A;&#x77E5;&#x5E76;&#x88AB;&#x81EA;&#x52A8;&#x66F4;&#x65B0;</span>&#x3002;</p>
+<p>[slide]</p>
+<p>#&#x8BA2;&#x9605;</p>
+<pre><code class="lang-javascript">Observable.prototype.on = Observable.prototype.addListener = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event, listener</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._events[event]) {
+        <span class="hljs-keyword">this</span>._events[event].push(listener);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">this</span>._events[event] = [listener];
+    }
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._events[event].length&gt;<span class="hljs-keyword">this</span>._maxListeners){
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">&apos;maxListener reached!&apos;</span>);
+    }
+}
+</code></pre>
+<p>[slide]</p>
+<p>#&#x53D1;&#x5E03;&#x4E8B;&#x4EF6;</p>
+<pre><code class="lang-javascript">Observable.prototype.emit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+    <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>,<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>._events[event]){
+        <span class="hljs-keyword">var</span> listeners = <span class="hljs-keyword">this</span>._events[event];
+        listeners.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">listener</span>)</span>{
+            listener.apply(<span class="hljs-literal">null</span>,args);
+        });
+    }
+}
+</code></pre>
+<p>[slide]</p>
+<p>#EventEmitter&#x65B9;&#x6CD5;</p>
+<ul>
+<li>addListener(event,listener) &#x5BF9;&#x6307;&#x5B9A;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A; {:&amp;.zoomIn}</li>
+<li>on(event,listener)&#x5BF9;&#x6307;&#x5B9A;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;</li>
+<li>once(event,listener);&#x7ED1;&#x5B9A;&#x4E00;&#x6B21;</li>
+<li>removeListener(event); &#x89E3;&#x9664;&#x76D1;&#x542C;</li>
+<li>removeAllListeners(event); &#x89E3;&#x9664;&#x6240;&#x6709;&#x5904;&#x7406;</li>
+<li>emit(event,arg1); &#x89E6;&#x53D1;&#x4E8B;&#x4EF6;</li>
+<li>setMaxListeners(n); &#x6700;&#x5927;&#x76D1;&#x542C;&#x6570;&#x91CF;</li>
+<li>listeners(event) &#x6240;&#x6709;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;</li>
+<li>listenerCount(emitter,event) &#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x6307;&#x5B9A;&#x5904;&#x7406;&#x51FD;&#x6570;</li>
+</ul>
+
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

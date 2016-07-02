@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li class="active"><a href="../html/E.global.html">E.global</a></li><li><a href="../html/F.module.html">F.module</a></li><li><a href="../html/G.buffer.html">G.buffer</a></li><li><a href="../html/H.file.html">H.file</a></li><li><a href="../html/IB.html">IB</a></li><li><a href="../html/J.event.html">J.event</a></li><li><a href="../html/K.stream.html">K.stream</a></li><li><a href="../html/LA.http.html">LA.http</a></li><li><a href="../html/LB.ajax.html">LB.ajax</a></li><li><a href="../html/LC.jsonp.html">LC.jsonp</a></li><li><a href="../html/LD.cross.html">LD.cross</a></li><li><a href="../html/LE.http.html">LE.http</a></li><li><a href="../html/git.html">git</a></li><li><a href="../html/nodestart.html">nodestart</a></li><li><a href="../html/webstorm.html">webstorm</a></li><li><a href="../html/nodebasic.html">nodebasic</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: E.global
+speaker: &#x73E0;&#x5CF0;&#x57F9;&#x8BAD;
+url: <a href="https://github.com/zhufengpeixun">https://github.com/zhufengpeixun</a>
+transition: slide3
+files: /js/demo.js,/css/demo.css,/js/zoom.js
+theme: blue
+usemathjax: yes</p>
+<p>[slide]</p>
+<p>#Node.js&#x4E2D;&#x5168;&#x5C40;&#x5BF9;&#x8C61;</p>
+<ul>
+<li>Node.js&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x79F0;&#x4E3A;&#x5168;&#x5C40;&#x5BF9;&#x8C61;<code>Global</code>,&#x5B83;&#x53CA;&#x5176;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x90FD;&#x53EF;&#x4EE5;&#x5728;&#x7A0B;&#x5E8F;&#x7684;&#x4EFB;&#x4F55;&#x5730;&#x65B9;&#x8BBF;&#x95EE;&#xFF0C;&#x5373;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x3002;</li>
+<li>&#x5728;&#x6D4F;&#x89C8;&#x5668; JavaScript &#x4E2D;&#xFF0C;&#x901A;&#x5E38; window &#x662F;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#xFF0C; &#x800C; Node.js &#x4E2D;&#x7684;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x662F; global</li>
+</ul>
+<p>[slide]</p>
+<p>#&#x5168;&#x5C40;&#x5BF9;&#x8C61;</p>
+<ul>
+<li>console {:&amp;.zoomIn}</li>
+<li>__filename(&#x4E0D;&#x662F;global&#x7684;&#x5C5E;&#x6027;)</li>
+<li>__dirname(&#x4E0D;&#x662F;global&#x7684;&#x5C5E;&#x6027;)</li>
+<li>setTimeout</li>
+<li>setImmediate</li>
+</ul>
+<p>[slide]</p>
+<p>#process</p>
+<ul>
+<li>cwd {:&amp;.zoomIn}</li>
+<li>chdir</li>
+<li>memoryUsage</li>
+<li>nextTick</li>
+</ul>
+
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

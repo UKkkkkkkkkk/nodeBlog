@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li><a href="../html/IB.html">IB</a></li><li class="active"><a href="../html/LC.jsonp.html">LC.jsonp</a></li><li><a href="../html/LD.cross.html">LD.cross</a></li><li><a href="../html/LE.http.html">LE.http</a></li><li><a href="../html/git.html">git</a></li><li><a href="../html/nodestart.html">nodestart</a></li><li><a href="../html/webstorm.html">webstorm</a></li><li><a href="../html/nodebasic.html">nodebasic</a></li><li><a href="../html/global.html">global</a></li><li><a href="../html/module.html">module</a></li><li><a href="../html/buffer.html">buffer</a></li><li><a href="../html/file.html">file</a></li><li><a href="../html/event.html">event</a></li><li><a href="../html/stream.html">stream</a></li><li><a href="../html/http.html">http</a></li><li><a href="../html/ajax.html">ajax</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: LC.jsonp
+speaker:  &#x73E0;&#x5CF0;&#x57F9;&#x8BAD;
+url: <a href="http://www.zhufengpeixun.com">http://www.zhufengpeixun.com</a>
+transition: cards
+theme: blue
+highlightStyle:javascript</p>
+<p>[slide]</p>
+<p>##ajax&#x9884;&#x4E60;&#x8BFE;-jsonp
+<small>&#x73E0;&#x5CF0;&#x57F9;&#x8BAD;</small></p>
+<p>[slide]</p>
+<p>#&#x540C;&#x6E90;&#x7B56;&#x7565;
+&#x540C;&#x6E90;&#x7B56;&#x7565;&#x5C31;&#x662F;&#x89C4;&#x5B9A;&#x4E86;javascript<em>&#x53EF;&#x4EE5;&#x64CD;&#x4F5C;</em>&#x90A3;&#x4E9B;web&#x5185;&#x5BB9;&#x7684;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x5B89;&#x5168;&#x9650;&#x5236;&#x3002;</p>
+<p>[slide]</p>
+<p>#&#x4EC0;&#x4E48;&#x662F;&#x540C;&#x6E90;&#xFF1F;
+&#x540C;&#x6E90;&#x5C31;&#x662F;&#x89C4;&#x5B9A;&#x591A;&#x4E2A;<em>web</em>&#x8D44;&#x6E90;&#x7684;<em>url</em>&#x4E2D;<code>scheme(&#x534F;&#x8BAE;)</code>&#x3001;<code>hostname(&#x57DF;&#x540D;&#x6216;IP)</code>&#x3001;<code>port(&#x7AEF;&#x53E3;)</code>&#x5FC5;&#x987B;&#x76F8;&#x540C;&#xFF0C;&#x53EA;&#x8981;&#x6709;&#x4E00;&#x9879;&#x4E0D;&#x540C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;<code>web</code>&#x8D44;&#x6E90;&#x5C31;&#x4E0D;&#x662F;&#x540C;&#x6E90;&#x7684;&#x3002;</p>
+<p>[slide]</p>
+<p>#&#x4EC0;&#x4E48;&#x662F;&#x8DE8;&#x57DF;&#xFF1F;
+&#x5F53;&#x8BF7;&#x6C42;&#x7684;&#x8D44;&#x6E90;&#x7684;<em>URL</em>&#x4E0E;<strong>&#x5F53;&#x524D;&#x9875;&#x9762;</strong>&#x7684;<em>URL</em>&#x4E2D;&#x7684;<code>scheme(&#x534F;&#x8BAE;)</code>&#x3001;<code>hostname(&#x57DF;&#x540D;&#x6216;IP)</code>&#x3001;<code>port(&#x7AEF;&#x53E3;)</code>&#x6709;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x7B97;&#x662F;&#x8DE8;&#x57DF;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>[slide]</p>
+<p>#JSONP</p>
+<ul>
+<li><em>script</em>&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x4E00;&#x79CD;<em>Ajax</em>&#x4F20;&#x8F93;&#x534F;&#x8BAE;</li>
+<li>&#x53EA;&#x9700;&#x8BBE;&#x7F6E;<em>script</em>&#x5143;&#x7D20;&#x7684;<code>src</code>&#x5C5E;&#x6027;&#x5E76;&#x4E14;&#x63D2;&#x5165;&#x5230;<em>DOM</em>&#x4E2D;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5C31;&#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;<em>HTTP</em>&#x8BF7;&#x6C42;&#x5230;<em>src</em>&#x5C5E;&#x6027;&#x6240;&#x6307;&#x5411;&#x7684;<em>URL</em>&#x3002;</li>
+<li>script&#x4E0D;&#x53D7;<em>&#x540C;&#x6E90;&#x7B56;&#x7565;</em>&#x7684;&#x5F71;&#x54CD;</li>
+<li>script&#x5143;&#x7D20;&#x4F1A;<em>&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;</em>&#x5E76;<strong>&#x6267;&#x884C;</strong>&#x4E0B;&#x8F7D;&#x7684;&#x6570;&#x636E;</li>
+<li>&#x4F7F;&#x7528;&#x8FD9;&#x79CD;script&#x5143;&#x7D20;&#x6765;&#x8FDB;&#x884C;<em>Ajax</em>&#x6570;&#x636E;&#x7684;&#x4F20;&#x8F93;&#x7684;&#x6280;&#x672F;&#x5C31;&#x53EB;&#x505A;<em>JSONP</em>,&#x4E5F;&#x5C31;&#x662F;<code>JSON&#xFF0D;Padding</code>.<pre><code>//&#x670D;&#x52A1;&#x5668;&#x4E0D;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x8FD9;&#x6837;&#x7684;&#x6570;&#x636E;
+[&quot;baidu&quot;,&quot;telnet&quot;,&quot;alibaba&quot;]
+//&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8FD9;&#x6837;&#x7684;&#x54CD;&#x5E94;
+functionName([&quot;baidu&quot;,&quot;telnet&quot;,&quot;alibaba&quot;])
+</code></pre><blockquote>
+<p>&#x5176;&#x4E2D;&#x7684;<em>functionName</em>&#x5FC5;&#x987B;&#x662F;&#x5728;<em>window</em>&#x4E0B;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7684;&#x540D;&#x79F0;</p>
+</blockquote>
+</li>
+</ul>
+<p>[slide]</p>
+<p>#&#x793A;&#x4F8B;</p>
+<pre><code>function search(){
+  var script = document.createElement(&apos;script&apos;);
+  var keyword = document.getElementById(&apos;keyword&apos;).value;
+  script.src = &apos;http://suggestion.baidu.com/su?wd=a&amp;cb=show&apos;;
+  script.src = &apos;http://localhost/search?keyword=&apos;+keyword+&apos;&amp;callback=show&apos;;
+  document.body.appendChild(script);
+}
+</code></pre>
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

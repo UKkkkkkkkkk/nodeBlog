@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li><a href="../html/IB.html">IB</a></li><li class="active"><a href="../html/K.stream.html">K.stream</a></li><li><a href="../html/LA.http.html">LA.http</a></li><li><a href="../html/LB.ajax.html">LB.ajax</a></li><li><a href="../html/LC.jsonp.html">LC.jsonp</a></li><li><a href="../html/LD.cross.html">LD.cross</a></li><li><a href="../html/LE.http.html">LE.http</a></li><li><a href="../html/git.html">git</a></li><li><a href="../html/nodestart.html">nodestart</a></li><li><a href="../html/webstorm.html">webstorm</a></li><li><a href="../html/nodebasic.html">nodebasic</a></li><li><a href="../html/global.html">global</a></li><li><a href="../html/module.html">module</a></li><li><a href="../html/buffer.html">buffer</a></li><li><a href="../html/file.html">file</a></li><li><a href="../html/event.html">event</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul><li><a href="#t0##fs模块读写方法">##fs模块读写方法</a></li><li><a href="#t1##ReadStream文件可读流">##ReadStream文件可读流</a></li><li><a href="#t2##可读流触发的事件">##可读流触发的事件</a></li><li><a href="#t3##可读流的方法">##可读流的方法</a></li><li><a href="#t4##可写流的方法">##可写流的方法</a></li></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: K. &#x6D41;stream
+speaker: &#x73E0;&#x5CF0;&#x57F9;&#x8BAD;
+url: <a href="https://github.com/zhufengpeixun">https://github.com/zhufengpeixun</a>
+transition: slide3
+files: /js/demo.js,/css/demo.css,/js/zoom.js
+theme: blue
+usemathjax: yes</p>
+<p>[slide]</p>
+<p>#Node.js&#x4E2D;&#x7684;&#x6D41;</p>
+<p>[slide]</p>
+<h2 id="t0##fs&#x6A21;&#x5757;&#x8BFB;&#x5199;&#x65B9;&#x6CD5;">##fs&#x6A21;&#x5757;&#x8BFB;&#x5199;&#x65B9;&#x6CD5; <a href="#t0##fs&#x6A21;&#x5757;&#x8BFB;&#x5199;&#x65B9;&#x6CD5;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x7528;&#x9014;</th>
+<th style="text-align:center">&#x5F02;&#x6B65;</th>
+<th>&#x540C;&#x6B65;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&#x5C06;&#x6587;&#x4EF6;&#x4F5C;&#x4E3A;<strong>&#x6574;&#x4F53;</strong>&#x8BFB;&#x5165;&#x7F13;&#x5B58;&#x533A;</td>
+<td style="text-align:center">readFile</td>
+<td>readFileSync</td>
+</tr>
+<tr>
+<td style="text-align:left">&#x5C06;&#x6570;&#x636E;&#x4F5C;&#x4E3A;<strong>&#x6574;&#x4F53;</strong>&#x5199;&#x5165;&#x6587;&#x4EF6;</td>
+<td style="text-align:center">writeFile</td>
+<td>writeFileSync</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>##&#x6D41;&#x7684;&#x6982;&#x5FF5;</p>
+<ul>
+<li>&#x6D41;&#x662F;&#x4E00;&#x7EC4;<strong>&#x6709;&#x5E8F;</strong>&#x7684;&#xFF0C;&#x6709;<strong>&#x8D77;&#x70B9;</strong>&#x548C;<strong>&#x7EC8;&#x70B9;</strong>&#x7684;<strong>&#x5B57;&#x8282;&#x6570;&#x636E;&#x4F20;&#x8F93;</strong>&#x624B;&#x6BB5; {:&amp;.moveIn}</li>
+<li>&#x4E0D;&#x5173;&#x5FC3;&#x6587;&#x4EF6;&#x7684;&#x6574;&#x4F53;&#x5185;&#x5BB9;&#xFF0C;&#x53EA;&#x5173;&#x6CE8;&#x662F;&#x5426;&#x4ECE;&#x6587;&#x4EF6;&#x4E2D;<strong>&#x8BFB;</strong>&#x5230;&#x4E86;&#x6570;&#x636E;&#xFF0C;&#x4EE5;&#x53CA;&#x8BFB;&#x5230;&#x6570;&#x636E;&#x4E4B;&#x540E;&#x7684;<strong>&#x5904;&#x7406;</strong></li>
+<li>&#x6D41;&#x662F;&#x4E00;&#x4E2A;<strong>&#x62BD;&#x8C61;&#x63A5;&#x53E3;</strong>&#xFF0C;&#x88AB; Node &#x4E2D;&#x7684;&#x5F88;&#x591A;&#x5BF9;&#x8C61;&#x6240;&#x5B9E;&#x73B0;&#x3002;&#x6BD4;&#x5982;&#x5BF9;&#x4E00;&#x4E2A; HTTP &#x670D;&#x52A1;&#x5668;&#x7684;&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;request&#x662F;&#x4E00;&#x4E2A;&#x6D41;&#x3002;</li>
+</ul>
+<p>[slide]</p>
+<p>##stream.Readable&#x53EF;&#x8BFB;&#x6D41;
+<small>&#x4F7F;&#x7528;&#x5B9E;&#x73B0;&#x4E86;stream.Readable&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#x6765;&#x5C06;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x8BFB;&#x53D6;&#x4E3A;&#x6D41;&#x6570;&#x636E;,&#x5728;&#x60A8;&#x8868;&#x660E;&#x60A8;<code>&#x672A;&#x51C6;&#x5907;&#x597D;</code>&#x63A5;&#x6536;&#x4E4B;&#x524D;&#xFF0C;Readable &#x6D41;&#x5E76;&#x4E0D;&#x4F1A;&#x5F00;&#x59CB;&#x53D1;&#x5C04;&#x6570;&#x636E;&#x3002;</small></p>
+<p>[slide]</p>
+<h2 id="t1##ReadStream&#x6587;&#x4EF6;&#x53EF;&#x8BFB;&#x6D41;">##ReadStream&#x6587;&#x4EF6;&#x53EF;&#x8BFB;&#x6D41; <a href="#t1##ReadStream&#x6587;&#x4EF6;&#x53EF;&#x8BFB;&#x6D41;"> # </a></h2>
+<pre><code>    fs.createReadStream(path,[options]);
+</code></pre><ul>
+<li>path &#x8BFB;&#x53D6;&#x7684;<strong>&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</strong> {:&amp;.moveIn}</li>
+<li>options<ul>
+<li>flags &#x5BF9;&#x6587;&#x4EF6;&#x91C7;&#x53D6;&#x4F55;&#x79CD;&#x64CD;&#x4F5C;,&#x9ED8;&#x8BA4;&#x4E3A; &apos;r&apos;</li>
+<li>encoding &#x6307;&#x5B9A;<strong>&#x7F16;&#x7801;</strong>&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;null</li>
+<li>start &#x7528;&#x6574;&#x6570;&#x8868;&#x793A;&#x6587;&#x4EF6;<strong>&#x5F00;&#x59CB;</strong>&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x8282;&#x6570;&#x7684;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</li>
+<li>end  &#x7528;&#x6574;&#x6570;&#x8868;&#x793A;&#x6587;&#x4EF6;<strong>&#x7ED3;&#x675F;</strong>&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x8282;&#x6570;&#x7684;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;(<em>&#x5305;&#x62EC;end&#x4F4D;&#x7F6E;</em>)</li>
+<li>highWaterMark  &#x6700;&#x9AD8;&#x6C34;&#x4F4D;&#x7EBF;&#xFF0C;&#x505C;&#x6B62;&#x4ECE;&#x5E95;&#x5C42;&#x8D44;&#x6E90;&#x8BFB;&#x53D6;&#x524D;&#x5185;&#x90E8;&#x7F13;&#x51B2;&#x533A;&#x6700;&#x591A;&#x80FD;&#x5B58;&#x653E;&#x7684;&#x5B57;&#x8282;&#x6570;&#x3002;&#x7F3A;&#x7701;&#x4E3A; 64kb</li>
+</ul>
+</li>
+</ul>
+<p>[slide]</p>
+<h2 id="t2##&#x53EF;&#x8BFB;&#x6D41;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;">##&#x53EF;&#x8BFB;&#x6D41;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6; <a href="#t2##&#x53EF;&#x8BFB;&#x6D41;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x4E8B;&#x4EF6;</th>
+<th style="text-align:left">&#x7528;&#x9014;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">data</td>
+<td style="text-align:left">&#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;<code>data</code>&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x5230;&#x4F1A;&#x5C06;&#x6D41;&#x5207;&#x6362;&#x5230;<strong>&#x6D41;&#x52A8;&#x6A21;&#x5F0F;</strong>&#xFF0C;&#x6570;&#x636E;&#x4F1A;&#x88AB;&#x5C3D;&#x53EF;&#x80FD;&#x5FEB;&#x7684;&#x8BFB;&#x51FA;</td>
+</tr>
+<tr>
+<td style="text-align:left">end</td>
+<td style="text-align:left">&#x8BE5;&#x4E8B;&#x4EF6;&#x4F1A;&#x5728;<strong>&#x8BFB;&#x5B8C;</strong>&#x6570;&#x636E;&#x540E;&#x88AB;&#x89E6;&#x53D1;</td>
+</tr>
+<tr>
+<td style="text-align:left">error</td>
+<td style="text-align:left">&#x5F53;&#x6570;&#x636E;&#x63A5;&#x6536;&#x65F6;&#x53D1;&#x751F;<strong>&#x9519;&#x8BEF;</strong>&#x65F6;&#x89E6;&#x53D1;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t3##&#x53EF;&#x8BFB;&#x6D41;&#x7684;&#x65B9;&#x6CD5;">##&#x53EF;&#x8BFB;&#x6D41;&#x7684;&#x65B9;&#x6CD5; <a href="#t3##&#x53EF;&#x8BFB;&#x6D41;&#x7684;&#x65B9;&#x6CD5;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x65B9;&#x6CD5;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">setEncoding</td>
+<td style="text-align:left">&#x6307;&#x5B9A;<strong>&#x7F16;&#x7801;</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">pause</td>
+<td style="text-align:left">&#x901A;&#x77E5;&#x5BF9;&#x8C61;<strong>&#x505C;&#x6B62;</strong>&#x89E6;&#x53D1;data&#x4E8B;&#x4EF6;</td>
+</tr>
+<tr>
+<td style="text-align:left">resume</td>
+<td style="text-align:left">&#x901A;&#x77E5;&#x5BF9;&#x8C61;<strong>&#x6062;&#x590D;</strong>&#x89E6;&#x53D1;data&#x4E8B;&#x4EF6;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>##Writable&#x53EF;&#x5199;&#x6D41;
+&#x4F7F;&#x7528;&#x5404;&#x79CD;&#x5B9E;&#x73B0;stream.Writable&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#x6765;&#x5C06;&#x6D41;&#x6570;&#x636E;<strong>&#x5199;&#x5165;</strong>&#x5230;&#x5BF9;&#x8C61;&#x4E2D;</p>
+<p>[slide]</p>
+<h2 id="t4##&#x53EF;&#x5199;&#x6D41;&#x7684;&#x65B9;&#x6CD5;">##&#x53EF;&#x5199;&#x6D41;&#x7684;&#x65B9;&#x6CD5; <a href="#t4##&#x53EF;&#x5199;&#x6D41;&#x7684;&#x65B9;&#x6CD5;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x65B9;&#x6CD5;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">write</td>
+<td style="text-align:left">&#x5199;&#x5165;&#x6570;&#x636E;</td>
+</tr>
+<tr>
+<td style="text-align:left">end</td>
+<td style="text-align:left"><strong>&#x7ED3;&#x675F;&#x5199;&#x5165;</strong>&#x6570;&#x636E;&#x65F6;&#x89E6;&#x53D1;,&#x8C03;&#x7528;&#x540E;&#x4E0D;&#x80FD;&#x518D;&#x5199;&#x5165;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>##WriteStream
+&#x5728;fs&#x6A21;&#x5757;&#x4E2D;&#x4F7F;&#x7528;<code>createWriteStream</code>&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5C06;&#x6D41;&#x6570;&#x636E;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684;<code>WriteStream</code>&#x5BF9;&#x8C61;</p>
+<pre><code>   fs.createWriteStream(path,[options]);
+</code></pre><ul>
+<li>path &#x8BFB;&#x53D6;&#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84; {:&amp;.moveIn}</li>
+<li>options<ul>
+<li>flags &#x5BF9;&#x6587;&#x4EF6;&#x91C7;&#x53D6;&#x4F55;&#x79CD;<strong>&#x64CD;&#x4F5C;</strong>,&#x9ED8;&#x8BA4;&#x4E3A; &apos;w&apos;</li>
+<li>encoding &#x6307;&#x5B9A;<strong>&#x7F16;&#x7801;</strong>&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;null</li>
+<li>highWaterMark  &#x6700;&#x9AD8;&#x6C34;&#x4F4D;&#x7EBF;&#xFF0C;write()&#x5F00;&#x59CB;&#x8FD4;&#x56DE; false &#x7684;<strong>&#x7F13;&#x51B2;&#x5927;&#x5C0F;</strong>&#x3002;&#x7F3A;&#x7701;&#x4E3A; 16kb</li>
+</ul>
+</li>
+</ul>
+<p>[slide]</p>
+<p>##write&#x65B9;&#x6CD5;</p>
+<pre><code> writable.write(chunk,[encoding],[callback]);
+</code></pre><ul>
+<li>&#x53C2;&#x6570; {:&amp;.moveIn}<ul>
+<li>chunk  &#x8981;<strong>&#x5199;&#x5165;</strong>&#x7684;&#x6570;&#x636E;&#xFF0C;Buffer&#x6216;&#x5B57;&#x7B26;&#x4E32;&#x5BF9;&#x8C61;&#xFF0C;&#x5FC5;&#x987B;&#x6307;&#x5B9A;</li>
+<li>encoding &#x5199;&#x5165;<strong>&#x7F16;&#x7801;</strong>&#xFF0C;chunk&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#x6709;&#x7528;&#xFF0C;&#x53EF;&#x9009;</li>
+<li>callback &#x5199;&#x5165;&#x6210;&#x529F;&#x540E;&#x7684;<strong>&#x56DE;&#x8C03;</strong></li>
+</ul>
+</li>
+<li>&#x8FD4;&#x56DE;&#x503C;&#x4E3A;&#x5E03;&#x5C14;&#x503C;&#xFF0C;&#x7CFB;&#x7EDF;&#x7F13;&#x5B58;&#x533A;&#x5B9A;&#x6EE1;&#x65F6;&#x4E3A;false,&#x672A;&#x6EE1;&#x65F6;&#x4E3A;true</li>
+</ul>
+<p>[slide]</p>
+<p>##end&#x65B9;&#x6CD5;
+&#x5728;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x5F53;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x5199;&#x5165;&#x6570;&#x636E;&#x65F6;&#x53EF;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#x5173;&#x95ED;&#x6587;&#x4EF6;&#x3002;
+&#x8FEB;&#x4F7F;&#x7CFB;&#x7EDF;&#x7F13;&#x5B58;&#x533A;&#x7684;&#x6570;&#x636E;&#x7ACB;&#x5373;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<pre><code> writable.end(chunk,[encoding],[callback]);
+</code></pre><p>[slide]</p>
+<p>##&#x7F13;&#x5B58;&#x533A;&#x6E05;&#x7A7A;&#x540E;&#x4F1A;&#x89E6;&#x53D1;drain&#x4E8B;&#x4EF6;</p>
+<pre><code>var desc = fs.createWriteStream(&apos;./anotherMsg.txt&apos;, {
+    flags: &apos;w&apos;,
+    encoding: &apos;utf8&apos;,
+    highWaterMark: 5
+});
+var i = 10;
+
+function write() {
+    var flag = true;
+    while (flag &amp;&amp; i&gt;0) {
+        flag = desc.write(&apos;&apos; + i--);
+    } 
+}
+
+desc.on(&apos;drain&apos;, function () {
+    write();
+});
+write();
+</code></pre><p>[slide]</p>
+<p>##pipe
+&#x6D41;&#xFF0C;&#x5C24;&#x5176;&#x662F; pipe() &#x65B9;&#x6CD5;&#x7684;&#x521D;&#x8877;&#xFF0C;&#x662F;&#x5C06;&#x6570;&#x636E;&#x7684;<strong>&#x6EDE;&#x7559;&#x91CF;</strong>&#x9650;&#x5236;&#x5230;&#x4E00;&#x4E2A;&#x53EF;&#x63A5;&#x53D7;&#x7684;&#x6C34;&#x5E73;&#xFF0C;&#x4EE5;&#x4F7F;&#x5F97;&#x4E0D;&#x540C;&#x901F;&#x5EA6;&#x7684;&#x6765;&#x6E90;&#x548C;&#x76EE;&#x6807;&#x4E0D;&#x4F1A;<strong>&#x6DF9;&#x6CA1;</strong>&#x53EF;&#x7528;&#x5185;&#x5B58;&#x3002;</p>
+<p>&#x7528;&#x6CD5;</p>
+<pre><code>    readStream.pipe(writeStream,[options]);
+    var from = fs.createReadStream(&apos;./test3.txt&apos;);
+    var to = fs.createWriteStream(&apos;./test4.txt&apos;);
+    from.pipe(to);
+    from.on(&apos;end&apos;,function(){
+        to.end(&apos;good bye&apos;);
+    })
+</code></pre><p>&#x539F;&#x7406;&#x5206;&#x6790;</p>
+<pre><code>    var from = fs.createReadStream(&apos;./1.txt&apos;);
+    var to = fs.createWriteStream(&apos;./2.txt&apos;);
+    from.on(&apos;data&apos;,function(data){
+        console.log(data);
+        var flag = to.write(data);
+        if(!flag){
+            from.pause();
+        }
+    });
+    to.on(&apos;drain&apos;,function(){
+        from.resume();
+    });
+    from.on(&apos;end&apos;,function(){
+        to.end();
+    });
+</code></pre>
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

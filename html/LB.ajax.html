@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li><a href="../html/IB.html">IB</a></li><li class="active"><a href="../html/LB.ajax.html">LB.ajax</a></li><li><a href="../html/LC.jsonp.html">LC.jsonp</a></li><li><a href="../html/LD.cross.html">LD.cross</a></li><li><a href="../html/LE.http.html">LE.http</a></li><li><a href="../html/git.html">git</a></li><li><a href="../html/nodestart.html">nodestart</a></li><li><a href="../html/webstorm.html">webstorm</a></li><li><a href="../html/nodebasic.html">nodebasic</a></li><li><a href="../html/global.html">global</a></li><li><a href="../html/module.html">module</a></li><li><a href="../html/buffer.html">buffer</a></li><li><a href="../html/file.html">file</a></li><li><a href="../html/event.html">event</a></li><li><a href="../html/stream.html">stream</a></li><li><a href="../html/http.html">http</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul><li><a href="#t0##参数解析">##参数解析</a></li><li><a href="#t1#readyState状态的值">#readyState状态的值</a></li><li><a href="#t2#服务器响应">#服务器响应</a></li><li><a href="#t3send方法重载参数">send方法重载参数</a></li><li><a href="#t4#form标签的enctype属性">#form标签的enctype属性</a></li><li><a href="#t5#xhr对象的方法">#xhr对象的方法</a></li><li><a href="#t6#xhr对象的属性">#xhr对象的属性</a></li><li><a href="#t7XMLHttpRequest.responseType设置该值能够改变响应类型,设置后会把XMLHttpRequest.response转化为相应的类型。">XMLHttpRequest.responseType设置该值能够改变响应类型,设置后会把XMLHttpRequest.response转化为相应的类型。</a></li></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: LB.ajax
+speaker:  &#x73E0;&#x5CF0;&#x57F9;&#x8BAD;
+url: <a href="http://www.zhufengpeixun.com">http://www.zhufengpeixun.com</a>
+transition: cards
+theme: blue
+highlightStyle:javascript</p>
+<p>[slide]</p>
+<p>##ajax
+<small>&#x73E0;&#x5CF0;&#x57F9;&#x8BAD;</small></p>
+<p>[slide]</p>
+<p>#&#x7B2C;&#x4E00;&#x6B65; <strong>&#x521B;&#x5EFA;</strong><code>ajax</code>&#x5BF9;&#x8C61;</p>
+<pre><code> var XHR = new XMLHttpRequest();
+</code></pre><p>[slide]</p>
+<p>#&#x7B2C;&#x4E8C;&#x6B65; <strong>&#x6253;&#x5F00;</strong>&#x8BF7;&#x6C42;</p>
+<pre><code>xhr.open(method, url, async, user, password);
+</code></pre><h2 id="t0##&#x53C2;&#x6570;&#x89E3;&#x6790;">##&#x53C2;&#x6570;&#x89E3;&#x6790; <a href="#t0##&#x53C2;&#x6570;&#x89E3;&#x6790;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;&#x540D;</th>
+<th style="text-align:left">&#x53C2;&#x6570;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">method</td>
+<td style="text-align:left"><em>http&#x65B9;&#x6CD5;</em>&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<em>POST</em>&#x3001;<em>GET</em>&#x3001;<em>PUT</em>&#x7B49;&#x3002;&#x5927;&#x5C0F;&#x5199;&#x4E0D;&#x654F;&#x611F;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:left">url</td>
+<td style="text-align:left">&#x8BF7;&#x6C42;&#x7684;<code>URL</code>&#x5730;&#x5740;&#xFF0C;&#x53EF;&#x4EE5;&#x4E3A;&#x7EDD;&#x5BF9;&#x5730;&#x5740;&#x4E5F;&#x53EF;&#x4EE5;&#x4E3A;&#x76F8;&#x5BF9;&#x5730;&#x5740;</td>
+</tr>
+<tr>
+<td style="text-align:left">async</td>
+<td style="text-align:left">&#x5E03;&#x5C14;&#x578B;&#xFF0C;&#x6307;&#x5B9A;&#x6B64;&#x8BF7;&#x6C42;<em>&#x662F;&#x5426;&#x4E3A;&#x5F02;&#x6B65;</em>&#x65B9;&#x5F0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;true&#x3002;&#x5982;&#x679C;&#x4E3A;&#x771F;&#xFF0C;&#x5F53;&#x72B6;&#x6001;&#x6539;&#x53D8;&#x65F6;&#x4F1A;&#x8C03;&#x7528;onreadystatechange&#x5C5E;&#x6027;&#x6307;&#x5B9A;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:left">user</td>
+<td style="text-align:left">&#x5982;&#x679C;&#x670D;&#x52A1;&#x5668;&#x9700;&#x8981;&#x9A8C;&#x8BC1;&#xFF0C;&#x6B64;&#x5904;&#x6307;&#x5B9A;<em>&#x7528;&#x6237;&#x540D;</em>, &#x9ED8;&#x8BA4;&#x662F;undefined</td>
+</tr>
+<tr>
+<td style="text-align:left">password</td>
+<td style="text-align:left">&#x9A8C;&#x8BC1;&#x4FE1;&#x606F;&#x4E2D;&#x7684;<em>&#x5BC6;&#x7801;</em>&#x90E8;&#x5206;, &#x9ED8;&#x8BA4;&#x662F;undefined</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>#&#x7B2C;&#x4E09;&#x6B65; &#x6307;&#x5B9A;&#x63A5;&#x6536;&#x54CD;&#x5E94;&#x7684;<em>&#x56DE;&#x8C03;&#x51FD;&#x6570;</em></p>
+<ul>
+<li>&#x5F53;<em>XMLHTTPRequest</em>&#x5BF9;&#x8C61;&#x7684;<strong>readyState</strong>&#x5C5E;&#x6027;&#x6539;&#x53D8;&#x65F6;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;<pre><code>oXMLHttpRequest.onreadystatechange = function(){};
+</code></pre>[slide]
+<em>XHR</em>&#x5BF9;&#x8C61;&#x72B6;&#x6001;</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;</th>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">readyState</td>
+<td style="text-align:left">oXMLHttpRequest&#x5BF9;&#x8C61;&#x7684;&#x72B6;&#x6001;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t1#readyState&#x72B6;&#x6001;&#x7684;&#x503C;">#readyState&#x72B6;&#x6001;&#x7684;&#x503C; <a href="#t1#readyState&#x72B6;&#x6001;&#x7684;&#x503C;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;</th>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0 (&#x672A;&#x521D;&#x59CB;&#x5316;)</td>
+<td style="text-align:left">&#x5BF9;&#x8C61;&#x5DF2;&#x5EFA;&#x7ACB;&#xFF0C;&#x4F46;&#x662F;&#x5C1A;&#x672A;&#x521D;&#x59CB;&#x5316;&#xFF08;&#x5C1A;&#x672A;&#x8C03;&#x7528;<code>open</code>&#x65B9;&#x6CD5;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:left">1 (&#x521D;&#x59CB;&#x5316;)</td>
+<td style="text-align:left">&#x5BF9;&#x8C61;&#x5DF2;&#x5EFA;&#x7ACB;&#xFF0C;&#x5C1A;&#x672A;&#x8C03;&#x7528;<code>send</code>&#x65B9;&#x6CD5;</td>
+</tr>
+<tr>
+<td style="text-align:left">2 (&#x53D1;&#x9001;&#x6570;&#x636E;)</td>
+<td style="text-align:left">send&#x65B9;&#x6CD5;&#x5DF2;&#x8C03;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x524D;&#x7684;&#x72B6;&#x6001;&#x53CA;<code>http</code>&#x5934;&#x672A;&#x77E5;</td>
+</tr>
+<tr>
+<td style="text-align:left">3 (&#x6570;&#x636E;&#x4F20;&#x9001;&#x4E2D;)</td>
+<td style="text-align:left">&#x5DF2;&#x63A5;&#x6536;&#x90E8;&#x5206;&#x6570;&#x636E;&#xFF0C;&#x56E0;&#x4E3A;&#x54CD;&#x5E94;&#x53CA;<em>http</em>&#x5934;&#x4E0D;&#x5168;&#xFF0C;&#x8FD9;&#x65F6;&#x901A;&#x8FC7;<em>responseBody</em>&#x548C;<em>responseText</em>&#x83B7;&#x53D6;&#x90E8;&#x5206;&#x6570;&#x636E;&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;</td>
+</tr>
+<tr>
+<td style="text-align:left">4 (&#x5B8C;&#x6210;)</td>
+<td style="text-align:left">&#x6570;&#x636E;&#x63A5;&#x6536;&#x5B8C;&#x6BD5;,&#x6B64;&#x65F6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x901A;&#x8FC7;<em>responseBody</em>&#x548C;<em>responseText</em>&#x83B7;&#x53D6;&#x5B8C;&#x6574;&#x7684;&#x56DE;&#x5E94;&#x6570;&#x636E;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t2#&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;">#&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94; <a href="#t2#&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;</th>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">status</td>
+<td style="text-align:left">http&#x7684;&#x54CD;&#x5E94;<em>&#x72B6;&#x6001;&#x7801;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">statusText</td>
+<td style="text-align:left">&#x8868;&#x793A;http&#x7684;&#x54CD;&#x5E94;&#x72B6;&#x6001;&#x7801;<em>&#x63CF;&#x8FF0;&#x7B26;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">responseText</td>
+<td style="text-align:left">&#x8868;&#x793A;<em>&#x54CD;&#x5E94;&#x4E3B;&#x4F53;</em></td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>#&#x53D1;&#x9001;&#x8BF7;&#x6C42;</p>
+<ul>
+<li><em>send</em>&#x65B9;&#x6CD5;&#x4F1A;&#x628A;&#x53C2;&#x6570;&#x653E;&#x5230;<strong>&#x8BF7;&#x6C42;&#x4F53;</strong>&#x91CC;</li>
+<li>&#x6240;&#x6709;<em>get</em>&#x7CFB;&#x4E0D;&#x80FD;&#x4F20;<strong>&#x53C2;&#x6570;</strong>,&#x800C;<em>post</em>&#x53EF;&#x80FD;&#x9700;&#x8981;</li>
+<li>&#x5F53;&#x4F7F;&#x7528;&#x540C;&#x6B65;&#x7684;&#x65F6;&#x5019; <em>send</em>&#x65B9;&#x6CD5;&#x540E;&#x90FD;&#x4F1A;&#x963B;&#x585E;,&#x4E00;&#x76F4;&#x7B49;&#x5230;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;,&#x6240;&#x4EE5;<em>send</em>&#x65B9;&#x6CD5;&#x8981;&#x653E;&#x5728;<em>&#x6700;&#x540E;</em></li>
+</ul>
+<pre><code>oXMLHttpRequest.send(varBody);
+</code></pre><h2 id="t3send&#x65B9;&#x6CD5;&#x91CD;&#x8F7D;&#x53C2;&#x6570;">send&#x65B9;&#x6CD5;&#x91CD;&#x8F7D;&#x53C2;&#x6570; <a href="#t3send&#x65B9;&#x6CD5;&#x91CD;&#x8F7D;&#x53C2;&#x6570;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;</th>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">&#x7A7A;</td>
+</tr>
+<tr>
+<td style="text-align:left">DOMString</td>
+<td style="text-align:left">&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td style="text-align:left">FormData</td>
+<td style="text-align:left">&#x683C;&#x5F0F;&#x5316;&#x8868;&#x5355;&#x6570;&#x636E;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t4#form&#x6807;&#x7B7E;&#x7684;enctype&#x5C5E;&#x6027;">#form&#x6807;&#x7B7E;&#x7684;enctype&#x5C5E;&#x6027; <a href="#t4#form&#x6807;&#x7B7E;&#x7684;enctype&#x5C5E;&#x6027;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x503C;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">application/x-www-form-urlencoded</td>
+<td style="text-align:left">&#x5728;&#x53D1;&#x9001;&#x524D;<em>&#x7F16;&#x7801;</em>&#x6240;&#x6709;&#x5B57;&#x7B26;&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:left">multipart/form-data</td>
+<td style="text-align:left"><em>&#x4E0D;&#x5BF9;&#x5B57;&#x7B26;&#x7F16;&#x7801;</em>,&#x5728;&#x4F7F;&#x7528;&#x5305;&#x542B;<strong>&#x6587;&#x4EF6;</strong>&#x4E0A;&#x4F20;&#x63A7;&#x4EF6;&#x7684;&#x8868;&#x5355;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x8BE5;&#x503C;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:left">text/plain</td>
+<td style="text-align:left">&#x7A7A;&#x683C;&#x8F6C;&#x6362;&#x4E3A; &quot;+&quot; &#x52A0;&#x53F7;&#xFF0C;&#x4F46;&#x4E0D;&#x5BF9;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x7F16;&#x7801;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t5#xhr&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;">#xhr&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5; <a href="#t5#xhr&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x65B9;&#x6CD5;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">setRequestHeader(key,value)</td>
+<td style="text-align:left">&#x8BBE;&#x7F6E;<em>&#x8BF7;&#x6C42;&#x5934;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">getAllResponseHeaders</td>
+<td style="text-align:left">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x7684;<em>&#x54CD;&#x5E94;&#x5934;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">getResponseHeader(key)</td>
+<td style="text-align:left">&#x83B7;&#x53D6;<em>&#x6307;&#x5B9A;</em>&#x7684;&#x54CD;&#x5E94;&#x5934;</td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<h2 id="t6#xhr&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;">#xhr&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027; <a href="#t6#xhr&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x540D;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">onreadystatechange</td>
+<td style="text-align:left">&#x4E00;&#x4E2A;&#x5F53;readyState&#x5C5E;&#x6027;&#x6539;&#x53D8;&#x65F6;&#x4F1A;&#x8C03;&#x7528;&#x7684;<em>&#x56DE;&#x8C03;&#x51FD;&#x6570;</em>&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td style="text-align:left">response</td>
+<td style="text-align:left"><em>&#x54CD;&#x5E94;&#x5185;&#x5BB9;</em>&#xFF0C;&#x54CD;&#x5E94;&#x5B9E;&#x4F53;&#x7C7B;&#x578B;&#x7531;<strong>responseType</strong>&#x6307;&#x5B9A;</td>
+</tr>
+<tr>
+<td style="text-align:left">responseType</td>
+<td style="text-align:left">&#x4FEE;&#x6539;&#x54CD;&#x5E94;<em>&#x7C7B;&#x578B;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">responseText</td>
+<td style="text-align:left">&#x54CD;&#x5E94;&#x4E3A;<em>&#x6587;&#x672C;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">status</td>
+<td style="text-align:left">&#x54CD;&#x5E94;<em>&#x72B6;&#x6001;&#x7801;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">statusText</td>
+<td style="text-align:left">&#x54CD;&#x5E94;&#x72B6;&#x6001;&#x7801;<em>&#x63CF;&#x8FF0;&#x4FE1;&#x606F;</em></td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>#responseType&#x54CD;&#x5E94;&#x7C7B;&#x578B;</p>
+<h2 id="t7XMLHttpRequest.responseType&#x8BBE;&#x7F6E;&#x8BE5;&#x503C;&#x80FD;&#x591F;&#x6539;&#x53D8;&#x54CD;&#x5E94;&#x7C7B;&#x578B;,&#x8BBE;&#x7F6E;&#x540E;&#x4F1A;&#x628A;XMLHttpRequest.response&#x8F6C;&#x5316;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x3002;">XMLHttpRequest.responseType&#x8BBE;&#x7F6E;&#x8BE5;&#x503C;&#x80FD;&#x591F;&#x6539;&#x53D8;&#x54CD;&#x5E94;&#x7C7B;&#x578B;,&#x8BBE;&#x7F6E;&#x540E;&#x4F1A;&#x628A;XMLHttpRequest.response&#x8F6C;&#x5316;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x3002; <a href="#t7XMLHttpRequest.responseType&#x8BBE;&#x7F6E;&#x8BE5;&#x503C;&#x80FD;&#x591F;&#x6539;&#x53D8;&#x54CD;&#x5E94;&#x7C7B;&#x578B;,&#x8BBE;&#x7F6E;&#x540E;&#x4F1A;&#x628A;XMLHttpRequest.response&#x8F6C;&#x5316;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x3002;"> # </a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x5C5E;&#x6027;&#x540D;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&quot;&quot; (&#x7A7A;&#x5B57;&#x7B26;&#x4E32;)</td>
+<td style="text-align:left">&#x5B57;&#x7B26;&#x4E32;(&#x9ED8;&#x8BA4;&#x503C;),&#x8BBE;&#x7F6E;&#x540E;response&#x548C;responseText&#x90FD;&#x4F1A;&#x662F;&#x4E00;&#x4E2A;<em>&#x5B57;&#x7B26;&#x4E32;</em></td>
+</tr>
+<tr>
+<td style="text-align:left">json</td>
+<td style="text-align:left">&#x8BBE;&#x7F6E;&#x540E;response&#x548C;responseXML&#x90FD;&#x4F1A;&#x662F;&#x4E00;&#x4E2A;<em>JSON</em>&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td style="text-align:left">text</td>
+<td style="text-align:left">&#x5B57;&#x7B26;&#x4E32;,&#x8BBE;&#x7F6E;&#x540E;response&#x548C;responseText&#x90FD;&#x4F1A;&#x662F;&#x4E00;&#x4E2A;<em>&#x5B57;&#x7B26;&#x4E32;</em></td>
+</tr>
+</tbody>
+</table>
+<p>[slide]</p>
+<p>#get&#x7CFB;ajax</p>
+<pre><code>ActiveXObject(&quot;Msxml2.XMLHTTP&quot;) Msxml3.XMLHTTP Microsoft.XMLHTTP
+var x = XHR();
+        x.open(&apos;get&apos;, &apos;student.json&apos;,false,&apos;username&apos;,&apos;password&apos;);
+        x.onreadystatechange = function () {
+            if (x.readyState === 4 &amp;&amp; /^2\d{2}$/.test(x.status)) {
+                console.log(x.getAllResponseHeaders());
+                console.log(x.getResponseHeader(&apos;server&apos;));
+                console.log(x.responseText,x.status,x.statusText);
+            }
+        };
+        x.send();
+</code></pre><p>[slide]</p>
+<p>#post&#x7CFB;ajax</p>
+<pre><code>var xhr = XHR();
+xhr.open(&apos;post&apos;, &apos;/ajax&apos;,false);
+xhr.responseType = &apos;json&apos;;
+xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+xhr.send(&apos;name=zfpx&amp;age=6&apos;);
+</code></pre><p>[slide]</p>
+<p>#jquery&#x4E2D;&#x7684;ajax</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        $.ajax({
+            method: <span class="hljs-string">&apos;get&apos;</span>,<span class="hljs-comment">//&#x8BF7;&#x6C42;&#x7684;&#x65B9;&#x6CD5;</span>
+            url: <span class="hljs-string">&apos;/ajax&apos;</span>,<span class="hljs-comment">//&#x8BF7;&#x6C42;&#x7684;url</span>
+            data: {name:<span class="hljs-string">&quot;zfpx&quot;</span>},<span class="hljs-comment">//&#x53D1;&#x9001;&#x7684;&#x6570;&#x636E;</span>
+            processData: <span class="hljs-literal">true</span>,<span class="hljs-comment">//&#x662F;&#x5426;&#x5904;&#x7406;&#x6570;&#x636E;,&#x662F;&#x5426;&#x628A;&#x5BF9;&#x8C61;&#x8F6C;&#x6210;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;</span>
+            dataType: <span class="hljs-string">&apos;json&apos;</span>,<span class="hljs-comment">//&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;</span>
+            cache: <span class="hljs-literal">false</span>,<span class="hljs-comment">//&#x662F;&#x5426;&#x7F13;&#x5B58;</span>
+            <span class="hljs-keyword">async</span>: <span class="hljs-literal">true</span>,<span class="hljs-comment">//&#x662F;&#x5426;&#x5F02;&#x6B65;</span>
+            username: <span class="hljs-string">&apos;zfpx&apos;</span>,<span class="hljs-comment">//&#x7528;&#x6237;&#x540D;</span>
+            password: <span class="hljs-string">&apos;123456&apos;</span>,<span class="hljs-comment">//&#x5BC6;&#x7801;</span>
+            timeout: <span class="hljs-number">0</span>,<span class="hljs-comment">//&#x8D85;&#x65F6;&#x6BEB;&#x79D2;&#x6570;</span>
+            headers: {name:<span class="hljs-string">&apos;hotzf&apos;</span>},<span class="hljs-comment">//&#x81EA;&#x5B9A;&#x4E49;&#x5934;</span>
+            context: <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&apos;#content&apos;</span>),<span class="hljs-comment">//&#x4E0A;&#x4E0B;&#x6587; success error&#x6267;&#x884C;&#x65F6;&#x4E2D;&#x7684;this&#x6307;&#x5411;&#x8C01;</span>
+        }).done(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) </span>{<span class="hljs-comment">//&#x6210;&#x529F;&#x5904;&#x7406;</span>
+            <span class="hljs-keyword">this</span>.innerHTML = result;
+        }).fail(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err,headers</span>) </span>{<span class="hljs-comment">//&#x9519;&#x8BEF;&#x5904;&#x7406;</span>
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;promise error&apos;</span>,err,headers);
+        });
+    }
+</code></pre>
+
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

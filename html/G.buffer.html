@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>blog</title>
+        
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+</head>
+<body>
+<div class="navbar navbar-line">
+    <div class="container">
+        <div class="logo">
+            
+                blog
+            
+        </div>
+        <input type="checkbox" id="idoc_nav" />
+        <div class="menu_tree">
+        <ul><li><a href="../index.html">index</a></li><li class="active"><a href="../html/G.buffer.html">G.buffer</a></li><li><a href="../html/H.file.html">H.file</a></li><li><a href="../html/IB.html">IB</a></li><li><a href="../html/J.event.html">J.event</a></li><li><a href="../html/K.stream.html">K.stream</a></li><li><a href="../html/LA.http.html">LA.http</a></li><li><a href="../html/LB.ajax.html">LB.ajax</a></li><li><a href="../html/LC.jsonp.html">LC.jsonp</a></li><li><a href="../html/LD.cross.html">LD.cross</a></li><li><a href="../html/LE.http.html">LE.http</a></li><li><a href="../html/git.html">git</a></li><li><a href="../html/nodestart.html">nodestart</a></li><li><a href="../html/webstorm.html">webstorm</a></li><li><a href="../html/nodebasic.html">nodebasic</a></li><li><a href="../html/global.html">global</a></li><li><a href="../html/module.html">module</a></li></ul>    
+        </div>
+        
+        
+
+        <section class="idoc_nav_btn">
+            <label for="idoc_nav"><span></span></label>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="page-toc">
+        <ul><li><a href="#t0Buffer常用方法">Buffer常用方法</a></li></ul>
+    </div>
+    
+    <div class="content markdown-body">
+        <p>title: G.&#x7F13;&#x5B58;&#x533A;Buffer
+speaker:  &#x73E0;&#x5CF0;&#x57F9;&#x8BAD;
+url: <a href="http://www.zhufengpeixun.com">http://www.zhufengpeixun.com</a>
+transition: cards
+theme: blue
+highlightStyle:javascript</p>
+<p>[slide]</p>
+<p>##&#x4EC0;&#x4E48;&#x662F;Buffer</p>
+<ul>
+<li>&#x7F13;&#x51B2;&#x533A;Buffer&#x662F;&#x6682;&#x65F6;&#x5B58;&#x653E;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x6570;&#x636E;&#x7684;&#x4E00;&#x6BB5;<strong>&#x5185;&#x5B58;</strong>&#x3002; {:&amp;.moveIn}</li>
+<li>JS&#x8BED;&#x8A00;&#x6CA1;&#x6709;<strong>&#x4E8C;&#x8FDB;&#x5236;</strong>&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x5728;&#x5904;&#x7406;TCP&#x548C;&#x6587;&#x4EF6;&#x6D41;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x5904;&#x7406;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x3002;</li>
+<li>NodeJS&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;Buffer&#x5BF9;&#x8C61;&#x6765;&#x63D0;&#x4F9B;&#x5BF9;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x7684;&#x64CD;&#x4F5C;</li>
+<li>&#x662F;&#x4E00;&#x4E2A;&#x8868;&#x793A;<strong>&#x56FA;&#x5B9A;</strong>&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x8981;&#x653E;&#x5230;&#x7F13;&#x5B58;&#x533A;&#x4E2D;&#x7684;&#x5B57;&#x8282;&#x6570;&#x9700;&#x8981;<strong>&#x63D0;&#x524D;&#x786E;&#x5B9A;</strong></li>
+<li>Buffer&#x597D;&#x6BD4;&#x7531;&#x4E00;&#x4E2A;<strong>&#x591A;&#x4F4D;&#x5B57;&#x8282;</strong>&#x5143;&#x7D20;&#x7EC4;&#x6210;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x7684;&#x5728;javascript&#x4E2D;&#x8868;&#x793A;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;</li>
+</ul>
+<p>[slide]</p>
+<p>##&#x4EC0;&#x4E48;&#x662F;&#x5B57;&#x8282;</p>
+<ul>
+<li>&#x5B57;&#x8282;(Byte)&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x5B58;&#x50A8;&#x65F6;&#x7684;&#x4E00;&#x79CD;<em>&#x8BA1;&#x91CF;</em>&#x5355;&#x4F4D;&#xFF0C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7B49;&#x4E8E;<em>8&#x4F4D;</em>&#x4E8C;&#x8FDB;&#x5236;&#x6570; {:&amp;.zoomIn}</li>
+<li>&#x4E00;&#x4E2A;&#x4F4D;&#x5C31;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;0&#x6216;1&#xFF0C;&#x6BCF;8&#x4E2A;&#x4F4D;&#xFF08;bit&#xFF09;&#x7EC4;&#x6210;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#xFF08;Byte&#xFF09;</li>
+<li>&#x5B57;&#x8282;&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x4F20;&#x8F93;&#x4FE1;&#x606F;&#x7684;&#x5355;&#x4F4D;</li>
+<li>&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x6700;&#x5927;&#x503C;&#x5341;&#x8FDB;&#x5236;&#x6570;&#x662F;255
+ <img src="http://7xjf2l.com2.z0.glb.qiniucdn.com/bytes.jpg" class="img-responsive"><pre><code>var sum =0;
+for(var i=0;i&lt;8;i++){
+  sum += Math.pow(2,i);
+}
+</code></pre></li>
+</ul>
+<p>[slide]</p>
+<p>##&#x5B9A;&#x4E49;Buffer</p>
+<ul>
+<li>new Buffer(size) {:&amp;.moveIn}</li>
+<li>&#x6570;&#x7EC4;&#x521B;&#x5EFA; new Buffer(array);</li>
+<li>&#x5B57;&#x7B26;&#x4E32;&#x521B;&#x5EFA; new Buffer(str,[encoding]);</li>
+</ul>
+<p>[slide]</p>
+<p>##&#x5B57;&#x7B26;&#x4E32;&#x548C;Buffer&#x8F6C;&#x6362;</p>
+<ul>
+<li>buffer&#x8F6C;&#x5B57;&#x7B26;&#x4E32; buffer.toString([encoding],[start],[end]) {:&amp;.moveIn}</li>
+<li>&#x5B57;&#x7B26;&#x4E32;&#x8F6C;Buffer  new Buffer(str,[encoding]);</li>
+</ul>
+<p>[slide]</p>
+<h2 id="t0Buffer&#x5E38;&#x7528;&#x65B9;&#x6CD5;">Buffer&#x5E38;&#x7528;&#x65B9;&#x6CD5; <a href="#t0Buffer&#x5E38;&#x7528;&#x65B9;&#x6CD5;"> # </a></h2>
+<ul>
+<li>&#x590D;&#x5236;Buffer sourceBuffer.copy(targetBuffer,targetstart,sourcestart,sourceend)</li>
+<li>&#x5408;&#x5E76;Buffer Buffer.concat([buf1,buf2],length)  {:&amp;.moveIn}</li>
+<li>&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F; Buffer.isBuffer</li>
+<li>&#x83B7;&#x53D6;&#x5B57;&#x8282;&#x957F;&#x5EA6; Buffer.byteLength</li>
+</ul>
+<p>[slide]</p>
+<p>##&#x8FDB;&#x5236;&#x8F6C;&#x6362;</p>
+<ul>
+<li>&#x5C06;&#x4EFB;&#x610F;&#x8FDB;&#x5236;&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x6362;&#x4E3A;&#x5341;&#x8FDB;&#x5236;<ul>
+<li>parseInt(&quot;11&quot;, 2);   // 3   2&#x8FDB;&#x5236;&#x8F6C;10&#x8FDB;&#x5236;</li>
+<li>parseInt(&quot;77&quot;, 8);   // 63  8&#x8FDB;&#x5236;&#x8F6C;10&#x8FDB;&#x5236;</li>
+<li>parseInt(&quot;e7&quot;, 16);  //175  16&#x8FDB;&#x5236;&#x8F6C;10&#x8FDB;&#x5236;</li>
+</ul>
+</li>
+<li>&#x5C06;10&#x8FDB;&#x5236;&#x8F6C;&#x6362;&#x4E3A;&#x5176;&#x5B83;&#x8FDB;&#x5236;&#x5B57;&#x7B26;&#x4E32; Object.toString(n) n&#x8868;&#x793A;&#x8FDB;&#x5236;<ul>
+<li>(3).toString(2))   // &quot;11&quot; &#x5341;&#x8FDB;&#x5236;&#x8F6C;2&#x8FDB;&#x5236;</li>
+<li>(17).toString(16)  // &quot;11&quot; &#x5341;&#x8FDB;&#x5236;&#x8F6C;16&#x8FDB;&#x5236;</li>
+<li>(33).toString(32)  // &quot;11&quot; &#x5341;&#x63D0;&#x5236;&#x8F6C;32&#x8FDB;&#x5236;</li>
+</ul>
+</li>
+</ul>
+
+        <div class="copyright">Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a>. Dependence <a href="https://nodejs.org">Node.js</a> run.</div>
+    </div>
+
+</div>
+
+<style>
+    .page-toc{
+        overflow: hidden;
+        position:fixed;
+        left:50%;
+        margin-left:250px;
+	width:350px
+    }
+    .page-toc > ul li{
+        list-style-position: inside;
+	line-height:120%
+    }
+    .page-toc > ul{
+        transition: all 0.2s;
+        position: relative;
+    }
+    .page-toc > ul a {
+	color:#009a61;
+	font-size:110% ! important;
+	line-height:120%
+    }
+    .page-toc > ul .red{
+        background: #f3f3f3;
+        z-index: 1;
+        border-left: 3px solid #009a61;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+	color:#000
+    }
+
+    .markdown-body{
+	font-size: 120% ! important;
+        max-width:800px;
+    }
+    .container{
+       font-size: 110% ! important;
+    }
+    html,body,.container{
+      font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif ! important;
+    }
+    .markdown-body pre code{
+        font-size: 20px;
+        line-height: 24px;
+    }
+</style>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+<script>
+
+var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
+var count =  bar/26/2;
+var barHeight = $('.page-toc').outerHeight();
+$('.page-toc li').eq(0).children('a').addClass('red');
+var arr = [];
+$("h2,h3").each(function () {
+    arr.push($(this).position().top);
+});
+if(!($(window).height()-50 > barHeight)){
+    var flagTop = true;
+}
+function dark(){
+    var top =  Math.abs($('.page-toc > ul').position().top);
+    var cur = $(document).scrollTop();
+    for(var i = arr.length; i >=0;i--){
+        if(arr[i]<=cur){
+            break;
+        }
+    }
+    if(i===-1){
+        i = 0;
+    }
+    $('.page-toc li a').removeClass('red');
+    $('.page-toc li').eq(i).children('a').addClass('red');
+    if(flagTop){
+      if(i> arr.length-count){
+          $(' .page-toc > ul').css('top',-(barHeight-bar));
+          return;
+      }
+      if(i>count){
+          $(' .page-toc > ul').css('top',-26*(i-count));
+      }else{
+          $(' .page-toc > ul').css('top',0);
+      }
+    }
+}
+$(window).on('scroll',dark);
+</script>
+</body>
+</html>

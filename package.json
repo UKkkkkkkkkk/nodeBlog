@@ -1,0 +1,37 @@
+{
+    "name": "blog",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [
+        ""
+    ],
+    "homepage": "http://JSLite.io",
+    "author": "UKkkkkkkkkk <825846102@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "licenses": "MIT",
+    "idoc": {
+        "theme": "blog",
+        "md": [
+            "index.md",
+            "IB.md",
+            "git.md",
+            "nodestart.md",
+            "webstorm.md",
+            "nodebasic.md",
+            "global.md",
+            "module.md",
+            "buffer.md",
+            "file.md",
+            "event.md",
+            "stream.md",
+            "http.md",
+            "ajax.md",
+            "jsonp.md",
+            "cross.md",
+            "http2.md"
+        ]
+    }
+}
